@@ -40,7 +40,7 @@ async function descargarExcelProfesional() {
     if (!inicio || !fin) return alert("Por favor selecciona ambas fechas");
 
     try {
-        const url = `http://localhost:3000/api/reporte/rango?inicio=${inicio}&fin=${fin}`;
+        const url = `https://sistema-pareos.onrender.com/api/reporte/rango?inicio=${inicio}&fin=${fin}`;
         const res = await fetch(url);
         const datos = await res.json();
 
