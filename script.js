@@ -128,7 +128,7 @@ function notificar(titulo, msg, tipo = 'exito') {
     `;
 
     // LLAMADA A DATOS REALES
-    fetch('http://localhost:3000/api/dashboard/stats')
+    fetch('https://sistema-pareos.onrender.com/api/dashboard/stats')
         .then(res => res.json())
         .then(data => {
             const fmt = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' });
@@ -323,7 +323,7 @@ function abrirModalConfirmarTransferencia() {
 async function procesarTransferenciaMasiva() {
     try {
         // Enviamos la lista completa de productos seleccionados al servidor
-        const res = await fetch('http://localhost:3000/api/inventario/transferir-masivo', {
+        const res = await fetch('https://sistema-pareos.onrender.com/api/inventario/transferir-masivo', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ productos: seleccionados, destino: 2 })
@@ -351,7 +351,7 @@ function guardarConfiguracion() {
 // --- GESTIÓN DE PRECIOS ---
 async function cargarListaPrecios() {
     try {
-        const res = await fetch('http://localhost:3000/api/inventario-general');
+        const res = await fetch('https://sistema-pareos.onrender.com/api/inventario-general');
         const data = await res.json();
         const tbody = document.getElementById("tablaPreciosBody");
         if(!tbody) return;
@@ -391,7 +391,7 @@ async function actualizarPrecioIndividual(id, codigo) {
     boton.disabled = true;
     boton.innerText = "⌛...";
     try {
-        const res = await fetch('http://localhost:3000/api/inventario-general');
+        const res = await fetch('https://sistema-pareos.onrender.com/api/inventario-general');
         const data = await res.json();
         const prod = data.find(item => item.id_producto === id);
         await fetch(`http://localhost:3000/api/productos/${id}`, {
@@ -416,7 +416,7 @@ async function actualizarPrecioIndividual(id, codigo) {
 async function buscarNombrePorSKU(inputNombre, sku) {
     if (!sku) return;
     try {
-        const res = await fetch('http://localhost:3000/api/inventario-general');
+        const res = await fetch('https://sistema-pareos.onrender.com/api/inventario-general');
         const data = await res.json();
         const existe = data.find(p => p.codigo.toUpperCase() === sku.toUpperCase());
         if (existe) {
@@ -545,7 +545,7 @@ async function ejecutarGuardadoFinal() {
     });
     try {
         await Promise.all(Object.values(mapa).map(p => 
-            fetch('http://localhost:3000/api/productos', {
+            fetch('https://sistema-pareos.onrender.com/api/productos', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(p)
@@ -560,7 +560,7 @@ async function ejecutarGuardadoFinal() {
 
 async function cargarInventarioMaestro() {
     try {
-        const res = await fetch('http://localhost:3000/api/inventario-general');
+        const res = await fetch('https://sistema-pareos.onrender.com/api/inventario-general');
         const data = await res.json();
         const tbody = document.getElementById("tablaInventarioMaestroBody");
         if(!tbody) return;
@@ -624,7 +624,7 @@ async function guardarEdicionFinal(id, precioActual) {
     const sku = document.getElementById("edit-sku").value;
     const cant = document.getElementById("edit-cantidad").value;
     try {
-        await fetch(`http://localhost:3000/api/productos/${id}`, {
+        await fetch(`https://sistema-pareos.onrender.com/api/productos/${id}`, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ nombre: nombre, codigo: sku, precio: precioActual, cantidad: cant })
@@ -656,7 +656,7 @@ function prepararEliminar(id) {
 async function confirmarBorrado() {
     if(document.getElementById("passConfirm").value === "1234") {
         try {
-            await fetch(`http://localhost:3000/api/productos/${idProductoABorrar}`, { method: 'DELETE' });
+            await fetch(`https://sistema-pareos.onrender.com//api/productos/${idProductoABorrar}`, { method: 'DELETE' });
             document.querySelectorAll(".modal-overlay").forEach(m => m.remove());
             notificar("Borrado", "Registro eliminado.");
             cargarInventarioMaestro();
@@ -683,7 +683,7 @@ function filtrarPrecios() {
 
 async function actualizarReportes() {
     try {
-        const res = await fetch('http://localhost:3000/api/reportes/totales');
+        const res = await fetch('https://sistema-pareos.onrender.com/api/reportes/totales');
         const d = await res.json();
         if(document.getElementById("repo-ingresos")) {
             document.getElementById("repo-ingresos").innerText = "$" + (d.ingresos_totales || 0).toLocaleString();
@@ -780,7 +780,7 @@ async function cargarVistaTransferencias() {
 async function abrirModalNuevaTransferencia() {
     seleccionados = []; 
     try {
-        const res = await fetch('http://localhost:3000/api/inventario-general');
+        const res = await fetch('https://sistema-pareos.onrender.com/api/inventario-general');
         const todosLosProductos = await res.json();
 
         const modal = document.createElement("div");
@@ -968,7 +968,7 @@ function notificar(titulo, mensaje, tipo = "success") {
 }
 async function cargarDatosHistorial() {
     try {
-        const res = await fetch('http://localhost:3000/api/historial-transferencias');
+        const res = await fetch('https://sistema-pareos.onrender.com/api/historial-transferencias');
         const datos = await res.json();
         const tbody = document.getElementById("historialTransferenciasBody");
         
@@ -1049,7 +1049,7 @@ function configurarInterfazPorRol(rol) {
 }
 async function cargarDatosDashboard() {
     try {
-        const res = await fetch('http://localhost:3000/api/dashboard/stats');
+        const res = await fetch('https://sistema-pareos.onrender.com/api/dashboard/stats');
         const data = await res.json();
 
         // Llenar tarjetas principales
