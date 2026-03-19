@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const pass = document.getElementById("password").value;
 
             try {
-                const response = await fetch('https://sistema-pareos.onrender.com//api/login', {
+                const response = await fetch('https://sistema-pareos.onrender.com/api/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ usuario: user, password: pass })
