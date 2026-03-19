@@ -77,7 +77,7 @@ async function cargarVistaPOS() {
  */
 async function obtenerProductosTienda() {
     try {
-        const res = await fetch('http://localhost:3000/api/inventario-general');
+        const res = await fetch('https://sistema-pareos.onrender.com/api/inventario-general');
         const todos = await res.json();
         // Filtramos para que solo salgan productos de Tienda 1 (Sucursal 2)
         productosBaseDatos = todos.filter(p => p.id_sucursal == 2);
@@ -319,7 +319,7 @@ async function registrarVentaBD() {
 
     try {
         // Aquí es donde definimos "res"
-        const res = await fetch('http://localhost:3000/api/pos/venta', {
+        const res = await fetch('https://sistema-pareos.onrender.com/api/pos/venta', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(datosVenta)
