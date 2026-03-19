@@ -41,7 +41,7 @@ async function cargarVistaTransferencias() {
 }
 
 async function obtenerStockBodega() {
-    const res = await fetch('http://localhost:3000/api/inventario-general');
+    const res = await fetch('https://sistema-pareos.onrender.com/api/inventario-general');
     const todos = await res.json();
     // Solo mostramos productos que tengan stock en Bodega (Sucursal 1)
     productosBodega = todos.filter(p => p.id_sucursal == 1 && p.cantidad > 0);
