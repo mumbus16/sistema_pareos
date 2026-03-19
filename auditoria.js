@@ -20,7 +20,7 @@ async function iniciarConteo() {
     window.sucursalAuditoriaId = sucId;
 
     try {
-        const res = await fetch(`http://localhost:3000/api/productos/auditoria/${sucId}`);
+        const res = await fetch(`https://sistema-pareos.onrender.com/api/productos/auditoria/${sucId}`);
         const data = await res.json();
         
         if (!data || data.length === 0) {
@@ -125,7 +125,7 @@ async function guardarAuditoria(tipo) {
 
     try {
         // 🔹 GUARDAR AUDITORÍA
-        const res = await fetch('http://localhost:3000/api/auditoria/finalizar', {
+        const res = await fetch('https://sistema-pareos.onrender.com/api/auditoria/finalizar', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
@@ -147,7 +147,7 @@ async function guardarAuditoria(tipo) {
         }));
 
         // 🔥 ACTUALIZAR INVENTARIO
-        const res2 = await fetch('http://localhost:3000/api/auditoria/aplicar', {
+        const res2 = await fetch('https://sistema-pareos.onrender.com/api/auditoria/aplicar', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
