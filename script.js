@@ -391,10 +391,11 @@ async function actualizarPrecioIndividual(id, codigo) {
     boton.disabled = true;
     boton.innerText = "⌛...";
     try {
+        
         const res = await fetch('https://sistema-pareos.onrender.com/api/inventario-general');
         const data = await res.json();
         const prod = data.find(item => item.id_producto === id);
-        await fetch(`http://localhost:3000/api/productos/${id}`, {
+        await fetch(`https://sistema-pareos.onrender.com/api/productos/${id}`, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ nombre: prod.nombre, codigo: prod.codigo, precio: nuevoPrecio, cantidad: prod.cantidad })
