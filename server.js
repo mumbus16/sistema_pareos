@@ -17,6 +17,13 @@ const db = mysql.createPool({
     connectionLimit: 10,
     queueLimit: 0
 });
+const path = require("path");
+
+app.use(express.static(__dirname));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 
 // --- PRODUCTOS (LEER TODO) ---
 app.get('/api/inventario-general', async (req, res) => {
