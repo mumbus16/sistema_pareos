@@ -21,7 +21,12 @@ const db = mysql.createPool({
 const path = require("path");
 
 app.use(express.static(__dirname));
-
+console.log({
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER,
+  db: process.env.MYSQLDATABASE,
+  port: process.env.MYSQLPORT
+});
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
